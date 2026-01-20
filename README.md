@@ -1,11 +1,21 @@
 # Dad Jokes App
 
-A simple Angular web application that fetches and displays random dad jokes using the [Dad Jokes API](https://github.com/DadJokes-io/Dad_Jokes_API).
+A monorepo containing an Angular frontend and Express backend for displaying random dad jokes.
+
+## Project Structure
+
+```
+dad-jokes-webapp/
+├── apps/
+│   ├── frontend/    # Angular web application
+│   └── backend/     # Express API server
+└── package.json     # Root workspace config
+```
 
 ## Features
 
 - Landing page with "Want to hear a joke?" prompt
-- Fetches random jokes from the API
+- Fetches random jokes from the local backend API
 - Two-step joke reveal: setup first, then punchline
 - "Tell a different joke" button to get a new joke
 
@@ -13,7 +23,7 @@ A simple Angular web application that fetches and displays random dad jokes usin
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
+- Node.js (v22 or higher for native TypeScript support)
 - npm
 
 ### Installation
@@ -22,38 +32,64 @@ A simple Angular web application that fetches and displays random dad jokes usin
 npm install
 ```
 
-### Development server
+### Running the Application
+
+Start both frontend and backend:
 
 ```bash
-ng serve
+npm run dev
 ```
 
-Navigate to `http://localhost:4200/`.
+Or run them separately:
 
-## API Configuration
+```bash
+# Terminal 1 - Backend (http://localhost:3000)
+npm run dev:backend
 
-The app includes mock jokes for testing. To use the real Dad Jokes API:
+# Terminal 2 - Frontend (http://localhost:4200)
+npm run start:frontend
+```
 
-1. Get an API key from [RapidAPI - Dad Jokes](https://rapidapi.com/KegenGuyll/api/dad-jokes1)
-2. Update `src/environments/environment.ts`:
+## API Endpoints
 
-```typescript
-export const environment = {
-  production: false,
-  rapidApiKey: 'your-actual-api-key'
-};
+The backend provides the following endpoints:
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /random/joke` | Returns a random joke |
+| `GET /joke/:id` | Returns a specific joke by ID |
+| `GET /jokes` | Returns all jokes |
+| `GET /health` | Health check |
+
+### Response Format
+
+```json
+{
+  "success": true,
+  "body": [{
+    "_id": "1",
+    "type": "general",
+    "setup": "Why don't scientists trust atoms?",
+    "punchline": "Because they make up everything!"
+  }]
+}
 ```
 
 ## Building
 
 ```bash
-ng build
-```
+# Build all workspaces
+npm run build
 
-Build artifacts are stored in the `dist/` directory.
+# Build frontend only
+npm run build:frontend
+
+# Build backend only
+npm run build:backend
+```
 
 ## Running Tests
 
 ```bash
-ng test
+npm test
 ```

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  rapidApiKey: 'your-api-key-here'
+  apiUrl: 'http://localhost:3000'
 };
