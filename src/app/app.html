@@ -1,0 +1,45 @@
+<div class="container">
+  <!-- Landing State -->
+  @if (state() === 'landing') {
+    <div class="landing">
+      <h1>Want to hear a joke?</h1>
+      <button class="btn btn-primary" (click)="onYesClick()" [disabled]="isLoading()">
+        @if (isLoading()) {
+          Loading...
+        } @else {
+          Yes
+        }
+      </button>
+    </div>
+  }
+
+  <!-- Showing Joke State -->
+  @if (state() === 'showingJoke' || state() === 'showingPunchline') {
+    <div class="joke-container">
+      <div class="joke-setup">
+        <p>{{ currentJoke()?.setup }}</p>
+      </div>
+
+      @if (state() === 'showingPunchline') {
+        <div class="joke-punchline">
+          <p>{{ currentJoke()?.punchline }}</p>
+        </div>
+      }
+
+      <div class="button-group">
+        @if (state() === 'showingJoke') {
+          <button class="btn btn-secondary" (click)="onShowPunchlineClick()">
+            Show punchline
+          </button>
+        }
+        <button class="btn btn-primary" (click)="onTellDifferentJokeClick()" [disabled]="isLoading()">
+          @if (isLoading()) {
+            Loading...
+          } @else {
+            Tell a different joke
+          }
+        </button>
+      </div>
+    </div>
+  }
+</div>
