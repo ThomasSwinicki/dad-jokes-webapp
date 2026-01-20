@@ -1,5 +1,6 @@
 services:
   backend:
+    image: dj-backend:0.1.0
     build:
       context: ./apps/backend
       dockerfile: Dockerfile
@@ -14,6 +15,7 @@ services:
       retries: 3
 
   frontend:
+    image: dj-frontend:0.1.0
     build:
       context: ./apps/frontend
       dockerfile: Dockerfile
