@@ -93,3 +93,32 @@ npm run build:backend
 ```bash
 npm test
 ```
+
+## Docker
+
+### Running with Docker Compose
+
+```bash
+# Build and start all services
+docker compose up --build
+
+# Run in detached mode
+docker compose up -d --build
+
+# Stop services
+docker compose down
+```
+
+The application will be available at:
+- Frontend: http://localhost
+- Backend API: http://localhost:3000
+
+### Building Individual Images
+
+```bash
+# Build backend
+docker build -t dad-jokes-backend ./apps/backend
+
+# Build frontend
+docker build -t dad-jokes-frontend ./apps/frontend
+```
