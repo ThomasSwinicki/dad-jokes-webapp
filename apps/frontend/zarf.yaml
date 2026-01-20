@@ -1,0 +1,25 @@
+kind: ZarfPackageConfig 
+metadata:
+  name: frontend 
+  version: 0.1.0
+  description: |
+    "A Zarf Package that deploys the frontend for a Dad Jokes webapp."
+components:
+  - name: frontend
+    description: |
+      "Deploys the frontend for a Dad Jokes webapp into the cluster"
+    required: true
+    charts:
+      - name: frontend
+        localPath: chart
+        version: 0.1.0
+        namespace: dad-jokes
+        valuesFiles:
+          - frontend-values.yaml
+    images:
+      - dj-frontend:0.1.0
+    manifests:
+      - name: connect-services
+        namespace: dad-jokes
+        files:
+          - connect-services.yaml

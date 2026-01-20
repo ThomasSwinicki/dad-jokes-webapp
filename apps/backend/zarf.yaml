@@ -1,0 +1,20 @@
+kind: ZarfPackageConfig 
+metadata:
+  name: backend 
+  version: 0.1.0
+  description: |
+    "A Zarf Package that deploys the backend API for a Dad Jokes webapp."
+components:
+  - name: backend
+    description: |
+      "Deploys the backend API for a Dad Jokes webapp into the cluster"
+    required: true
+    charts:
+      - name: backend
+        localPath: chart
+        version: 0.1.0
+        namespace: dad-jokes
+        valuesFiles:
+          - backend-values.yaml
+    images:
+      - dj-backend:0.1.0
