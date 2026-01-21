@@ -1,0 +1,25 @@
+services:
+  backend:
+    image: dj-backend:0.1.0
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    image: dj-frontend:0.1.0
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
